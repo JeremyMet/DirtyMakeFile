@@ -48,8 +48,9 @@ class dirty_makefile(object):
             raise Exception("IOError", "File {} does not exist".format(path));
         for include in new_includes:
             if include in self.filetree_dic:
-                self.include_set.add(include);
-                self.createLists(self.filetree_dic[include]);
+                if not(include in self.include_set):
+                    self.include_set.add(include);
+                    self.createLists(self.filetree_dic[include]);
             else:
                 self.missing_set.add(include);
 
